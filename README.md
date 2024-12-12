@@ -1,10 +1,10 @@
 # StrandHead: Text to Strand-Disentangled 3D Head Avatars Using Hair Geometric Priors
 
-[**Project Page**](https://xiaokunsun.github.io/StrandHead.github.io/) | [**Arxiv**](https://xiaokunsun.github.io/StrandHead.github.io/) | [**Gallery**](https://xiaokunsun.github.io/StrandHead.github.io/)
+[**Project Page**](https://xiaokunsun.github.io/StrandHead.github.io) | [**Arxiv**](https://xiaokunsun.github.io/StrandHead.github.io) | [**Gallery**](https://xiaokunsun.github.io/StrandHead.github.io)
 
 Official repo of "StrandHead: Text to Strand-Disentangled 3D Head Avatars Using Hair Geometric Priors"
 
-[Xiaokun Sun](https://xiaokunsun.github.io/), Zeyu Cai, [Zhenyu Zhang](https://jessezhang92.github.io/), [Ying Tai](https://tyshiwo.github.io/index.html), [Jian Yang](https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ), 
+[Xiaokun Sun](https://xiaokunsun.github.io), Zeyu Cai, [Zhenyu Zhang](https://jessezhang92.github.io), [Ying Tai](https://tyshiwo.github.io/index.html), [Jian Yang](https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ), 
 
 <p align="center"> All Code will be released soon... 🚀🚀🚀 </p>
 
