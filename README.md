@@ -1,6 +1,6 @@
 # StrandHead: Text to Strand-Disentangled 3D Head Avatars Using Hair Geometric Priors
 
-[**Project Page**](https://xiaokunsun.github.io/StrandHead.github.io) | [**Arxiv**](https://xiaokunsun.github.io/StrandHead.github.io) | [**Gallery**](https://xiaokunsun.github.io/StrandHead.github.io)
+[**Project Page**](https://xiaokunsun.github.io/StrandHead.github.io) | [**Arxiv**](https://arxiv.org/abs/2412.11586) | [**Gallery**](https://drive.google.com/drive/folders/1Ve2vVVilzI-2TYNB9wQrLgG53L2PjFBM?usp=sharing)
 
 Official repo of "StrandHead: Text to Strand-Disentangled 3D Head Avatars Using Hair Geometric Priors"
 
@@ -20,7 +20,7 @@ Abstract: While haircut indicates distinct personality, existing avatar generati
 @article{sun2024strandhead,
   title={StrandHead: Text to Strand-Disentangled 3D Head Avatars Using Hair Geometric Priors},
   author={Sun, Xiaokun and Cai, Zeyu and Zhang, Zhenyu and Tai, Ying and Yang, Jian},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  journal={arXiv preprint arXiv:2412.11586},
   year={2024}
 }
 ```
