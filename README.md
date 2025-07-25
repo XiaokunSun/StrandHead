@@ -17,7 +17,7 @@ Abstract: While haircut indicates distinct personality, existing avatar generati
 ## BibTeX
 
 ```bibtex
-@inproceedings{sun2024strandhead,
+@inproceedings{StrandHead,
   title={StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors},
   author={Sun, Xiaokun and Cai, Zeyu and Tai, Ying and Yang, Jian and Zhang, Zhenyu},
   booktitle=ICCV,
