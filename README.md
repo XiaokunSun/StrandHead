@@ -4,7 +4,7 @@
 
 Official repo of "StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors"
 
-[Xiaokun Sun](https://xiaokunsun.github.io), [Zeyu Cai](https://github.com/zcai0612/), [Ying Tai](https://tyshiwo.github.io/index.html), [Jian Yang](https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ), [Zhenyu Zhang](https://jessezhang92.github.io)
+[Xiaokun Sun](https://xiaokunsun.github.io), [Zeyu Cai](https://github.com/zcai0612), [Ying Tai](https://tyshiwo.github.io/index.html), [Jian Yang](https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ), [Zhenyu Zhang](https://jessezhang92.github.io)
 
 <p align="center"> All Code will be released soon... 🚀🚀🚀 </p>
 
