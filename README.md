@@ -1,23 +1,127 @@
+<div align="center">
+
 # [ICCV 2025] StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors
 
-[**Project Page**](https://xiaokunsun.github.io/StrandHead.github.io) | [**Arxiv**](https://arxiv.org/abs/2412.11586) | [**Gallery**](https://drive.google.com/drive/folders/1Ve2vVVilzI-2TYNB9wQrLgG53L2PjFBM?usp=sharing)
+<div>
+    <a href="https://xiaokunsun.github.io"><strong>Xiaokun Sun</strong></a>,
+    <a href="https://zcai0612.github.io"><strong>Zeyu Cai</strong></a>,
+    <a href="https://tyshiwo.github.io/index.html"><strong>Ying Tai</strong></a>,
+    <a href="https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ"><strong>Jian Yang</strong></a>,
+    <a href="https://jessezhang92.github.io"><strong>Zhenyu Zhang</strong></a><sup>*</sup>,
+</div>
 
-Official repo of "StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors"
+<div>
+    <strong>Nanjing University</strong>
+</div>
 
-[Xiaokun Sun](https://xiaokunsun.github.io), [Zeyu Cai](https://zcai0612.github.io), [Ying Tai](https://tyshiwo.github.io/index.html), [Jian Yang](https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ), [Zhenyu Zhang](https://jessezhang92.github.io)
+<div>
+    <sup>*</sup><strong>Corresponding Author</strong>
+</div>
 
-<p align="center"> All Code will be released soon... 🚀🚀🚀 </p>
+<br>
 
-Abstract: While haircut indicates distinct personality, existing avatar generation methods fail to model practical hair due to the data limitation or entangled representation. We propose StrandHead, a novel text-driven method capable of generating 3D hair strands and disentangled head avatars with strand-level attributes. Instead of using large-scale hair-text paired data for supervision, we demonstrate that realistic hair strands can be generated from prompts by distilling 2D generative models pre-trained on human mesh data. To this end, we propose a meshing approach guided by strand geometry to guarantee the gradient flow from the distillation objective to the neural strand representation. The optimization is then regularized by statistically significant haircut features, leading to stable updating of strands against unreasonable drifting. These employed 2D/3D human-centric priors contribute to text-aligned and realistic 3D strand generation. Extensive experiments show that StrandHead achieves the state-of-the-art performance on text to strand generation and disentangled 3D head avatar modeling. The generated 3D hair can be applied on avatars for strand-level editing, as well as implemented in the graphics engine for physical simulation or other applications.
+[![ArXiv](https://img.shields.io/badge/ArXiv-2412.11586-b31b1b.svg)](https://arxiv.org/pdf/2412.11586)
+[![Project Page](https://img.shields.io/badge/Project%20Page-StrandHead-Green.svg)](https://xiaokunsun.github.io/StrandHead.github.io)
+[![Gallery](https://img.shields.io/badge/Gallery-View-blue.svg)](https://drive.google.com/drive/folders/1Ve2vVVilzI-2TYNB9wQrLgG53L2PjFBM?usp=sharing)
 
-<p align="center">
-    <img src="assets/teaser.png">
-</p>
+<br>
+<img src="assets/teaser.png" alt="Teaser" width="100%">
+</div>
 
-## BibTeX
+## 🔨 Installation
+Tested on **Ubuntu 20.04**, **Python 3.8**, **NVIDIA A6000**, **CUDA 11.7**, and **PyTorch 2.0.0**. Follow the steps below to set up the environment.
 
+1. Clone the repo:
+```bash
+git clone https://github.com/XiaokunSun/StrandHead.git
+cd StrandHead
+```
+2. Create a conda environment:
+```bash
+conda create -n strandhead python=3.8 -y
+conda activate strandhead
+```
+
+3. Install dependencies:
+```bash
+pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
+pip install -r requirements.txt
+pip install git+https://github.com/openai/CLIP.git
+pip install git+https://github.com/ashawkey/envlight.git
+pip install git+https://github.com/NVlabs/nvdiffrast.git --no-build-isolation
+pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
+pip install git+https://github.com/ashawkey/cubvh --no-build-isolation
+conda install https://anaconda.org/pytorch3d/pytorch3d/0.7.5/download/linux-64/pytorch3d-0.7.5-py38_cu117_pyt200.tar.bz2 # Note: Please ensure the pytorch3d version matches your CUDA and Torch versions
+```
+
+4. Download models:
+```bash
+mkdir ./pretrained_models
+bash ./scripts/download_humannorm_models.sh
+```
+5. Download other models (eg., FLAME, Tets) from [GoogleDrive](https://drive.google.com/drive/folders/1TJ41Nj6hkInd1DpGSzyjOw391kvOlQ4V?usp=sharing).
+Make sure you have the following models:
+```bash
+StrandHead
+|-- load
+    |-- flame_models
+        |-- flame
+            |-- closed_woeyes_flame_faces.npy
+            |-- face_flame_faces.npy
+            |-- ...
+            |-- NHC_scalp_vertex_idx.pth
+            |-- woeyes_flame_index.npy
+    |-- strandhead
+        |-- init_NHC
+            |-- A afro
+            |-- A short afro
+            |-- ...
+            |-- strands00372
+            |-- strands00384
+        |-- data_dict.json
+        |-- haar_head.obj
+        |-- init_NHC_dict.json
+        |-- strand_ckpt.pth
+        |-- USC_head.obj
+    |-- tets
+        |-- 256_tets.npz
+    |-- prompt_library.json
+|-- pretrained_models
+    |-- controlnet-normal-sd1.5
+    |-- depth-adapted-sd1.5
+    |-- normal-adapted-sd1.5
+    |-- normal-aligned-sd1.5
+```
+
+## 🕺 Inference
+```bash
+# Generate bald head
+python ./scripts/generate_bald_head.py --dict_path ./load/strandhead/data_dict.json --bald_head_exp_root_dir ./outputs/bald_head --bald_head_idx 0:1:1 --gpu_idx 0
+# Generate strand
+python ./scripts/generate_strand.py --dict_path ./load/strandhead/data_dict.json --bald_head_exp_root_dir ./outputs/bald_head --hair_head_exp_root_dir ./outputs/strand_head --idx 0:1:1 --gpu_idx 0
+```
+
+## 🪄 Application
+```bash
+# Hairstyle Editing
+python ./scripts/edit_strand_color.py
+python ./scripts/edit_strand_cuvr.py
+python ./scripts/edit_strand_length.py
+python ./scripts/edit_strand_num.py
+# Hairstyle Transfer
+python ./scripts/transfer_hair.py
+```
+If you wish to customize the initial hairstyle, please refer to our initialization approaches for hairstyles from the [USC-HairSalon](https://huliwenkidkid.github.io/liwenhu.github.io) dataset and those generated by [HAAR](https://github.com/Vanessik/HAAR), as implemented in ```./scripts/init_NHC_USC.py``` and ```./scripts/init_NHC_HAAR.py```, respectively. 
+Be sure to update the configuration files ```./load/strandhead/data_dict.json``` and ```./load/strandhead/init_NHC_dict.json``` accordingly.
+
+## ⭐ Acknowledgements
+This repository is based on many amazing research works and open-source projects: [ThreeStudio](https://github.com/threestudio-project/threestudio), [HumanNorm](https://github.com/xhuangcv/humannorm), [NeuralHaircut](https://github.com/Vanessik/NeuralHaircut), [HAAR](https://github.com/Vanessik/HAAR), etc. Thanks all the authors for their selfless contributions to the community!
+
+## 📚 Citation
+If you find this repository helpful for your work, please consider citing it as follows:
 ```bibtex
-@inproceedings{StrandHead,
+@inproceedings{sun2025strandhead,
   title={StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors},
   author={Sun, Xiaokun and Cai, Zeyu and Tai, Ying and Yang, Jian and Zhang, Zhenyu},
   booktitle=ICCV,
