@@ -32,67 +32,69 @@
 Tested on **Ubuntu 20.04**, **Python 3.8**, **NVIDIA A6000**, **CUDA 11.7**, and **PyTorch 2.0.0**. Follow the steps below to set up the environment.
 
 1. Clone the repo:
-```bash
-git clone https://github.com/XiaokunSun/StrandHead.git
-cd StrandHead
-```
+    ```bash
+    git clone https://github.com/XiaokunSun/StrandHead.git
+    cd StrandHead
+    ```
+
 2. Create a conda environment:
-```bash
-conda create -n strandhead python=3.8 -y
-conda activate strandhead
-```
+    ```bash
+    conda create -n strandhead python=3.8 -y
+    conda activate strandhead
+    ```
 
 3. Install dependencies:
-```bash
-pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
-pip install -r requirements.txt
-pip install git+https://github.com/openai/CLIP.git
-pip install git+https://github.com/ashawkey/envlight.git
-pip install git+https://github.com/NVlabs/nvdiffrast.git --no-build-isolation
-pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
-pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
-pip install git+https://github.com/ashawkey/cubvh --no-build-isolation
-conda install https://anaconda.org/pytorch3d/pytorch3d/0.7.5/download/linux-64/pytorch3d-0.7.5-py38_cu117_pyt200.tar.bz2 # Note: Please ensure the pytorch3d version matches your CUDA and Torch versions
-```
+    ```bash
+    pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
+    pip install -r requirements.txt
+    pip install git+https://github.com/openai/CLIP.git
+    pip install git+https://github.com/ashawkey/envlight.git
+    pip install git+https://github.com/NVlabs/nvdiffrast.git --no-build-isolation
+    pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+    pip install git+https://github.com/KAIR-BAIR/nerfacc.git@v0.5.2
+    pip install git+https://github.com/ashawkey/cubvh --no-build-isolation
+    conda install https://anaconda.org/pytorch3d/pytorch3d/0.7.5/download/linux-64/pytorch3d-0.7.5-py38_cu117_pyt200.tar.bz2 # Note: Please ensure the pytorch3d version matches your Python, CUDA and Torch versions
+    ```
 
-4. Download models:
-```bash
-mkdir ./pretrained_models
-bash ./scripts/download_humannorm_models.sh
-```
+4. Download pretrained models:
+    ```bash
+    mkdir ./pretrained_models
+    bash ./scripts/download_humannorm_models.sh
+    ```
+
 5. Download other models (eg., FLAME, Tets) from [GoogleDrive](https://drive.google.com/drive/folders/1TJ41Nj6hkInd1DpGSzyjOw391kvOlQ4V?usp=sharing).
-Make sure you have the following models:
-```bash
-StrandHead
-|-- load
-    |-- flame_models
-        |-- flame
-            |-- closed_woeyes_flame_faces.npy
-            |-- face_flame_faces.npy
-            |-- ...
-            |-- NHC_scalp_vertex_idx.pth
-            |-- woeyes_flame_index.npy
-    |-- strandhead
-        |-- init_NHC
-            |-- A afro
-            |-- A short afro
-            |-- ...
-            |-- strands00372
-            |-- strands00384
-        |-- data_dict.json
-        |-- haar_head.obj
-        |-- init_NHC_dict.json
-        |-- strand_ckpt.pth
-        |-- USC_head.obj
-    |-- tets
-        |-- 256_tets.npz
-    |-- prompt_library.json
-|-- pretrained_models
-    |-- controlnet-normal-sd1.5
-    |-- depth-adapted-sd1.5
-    |-- normal-adapted-sd1.5
-    |-- normal-aligned-sd1.5
-```
+    Make sure you have the following models:
+    ```bash
+    StrandHead
+    |-- load
+        |-- flame_models
+            |-- flame
+                |-- closed_woeyes_flame_faces.npy
+                |-- face_flame_faces.npy
+                |-- ...
+                |-- NHC_scalp_vertex_idx.pth
+                |-- woeyes_flame_index.npy
+        |-- strandhead
+            |-- init_NHC
+                |-- A afro
+                |-- A short afro
+                |-- ...
+                |-- strands00372
+                |-- strands00384
+            |-- data_dict.json
+            |-- haar_head.obj
+            |-- init_NHC_dict.json
+            |-- strand_ckpt.pth
+            |-- USC_head.obj
+        |-- tets
+            |-- 256_tets.npz
+        |-- prompt_library.json
+    |-- pretrained_models
+        |-- controlnet-normal-sd1.5
+        |-- depth-adapted-sd1.5
+        |-- normal-adapted-sd1.5
+        |-- normal-aligned-sd1.5
+    ```
 
 ## 🕺 Inference
 ```bash
@@ -124,7 +126,7 @@ If you find this repository helpful for your work, please consider citing it as 
 @inproceedings{sun2025strandhead,
   title={StrandHead: Text to Hair-Disentangled 3D Head Avatars Using Human-Centric Priors},
   author={Sun, Xiaokun and Cai, Zeyu and Tai, Ying and Yang, Jian and Zhang, Zhenyu},
-  booktitle=ICCV,
+  booktitle={ICCV},
   year={2025}
 }
 ```
